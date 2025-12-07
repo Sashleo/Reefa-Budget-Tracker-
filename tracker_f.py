@@ -360,29 +360,6 @@ with st.expander("Filter Options"):
             end_date = st.date_input("End Date", value=max_date, key="expense_end_date")
 
         # Apply filters
-       # Enhanced filter code with amount range
-# --- Filter & Export Expenses ---
-st.subheader(" Filter & Export Expenses")
-with st.expander("Filter Options"):
-    if not st.session_state.expenses.empty:
-        # Category filter
-        filter_category = st.selectbox(
-            "Filter by Category",
-            options=["All"] + list(st.session_state.expenses["Category"].unique()),
-            key="expense_filter_category"
-        )
-
-        # Date range filter
-        min_date = st.session_state.expenses["Date"].min().date()
-        max_date = st.session_state.expenses["Date"].max().date()
-        
-        col_date1, col_date2 = st.columns(2)
-        with col_date1:
-            start_date = st.date_input("Start Date", value=min_date, key="expense_start_date")
-        with col_date2:
-            end_date = st.date_input("End Date", value=max_date, key="expense_end_date")
-
-        # Apply filters
         filtered_data = st.session_state.expenses.copy()
         filtered_data["Date"] = pd.to_datetime(filtered_data["Date"], errors="coerce")
         filtered_data = filtered_data[
